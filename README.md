@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Finilo Web
 
-## Getting Started
+Marketing landing page for [Finilo](https://finilo.app) — Next.js (App Router) + Tailwind CSS.
 
-First, run the development server:
+## Landing page (pixel match to Figma)
+
+The home page implements the **🖱️ Landing Page** frame (`ldp`, 1512×4947) from the Finilo Figma file: exact positioning, typography scale (SF Pro on Apple devices, Inter for body), colors (`#000`, `#262626`, `#8e8e93`, feature tints), and **local copies** of all raster/SVG assets under `public/images/ldp/`.
+
+- **Desktop:** View at **≥1512px** width for a 1:1 match (or zoom the browser).
+- **Narrower screens:** Horizontal scroll on the outer wrapper so nothing squishes.
+
+Refresh assets after design changes:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+node scripts/download-ldp-assets.mjs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Develop
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## Build
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js 15
+- React 19
+- Tailwind CSS 4
+- Sora (Google Fonts), aligned with Finilo mobile branding
 
-## Deploy on Vercel
+## Images from Figma
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Figma MCP** can return asset URLs via `get_design_context`, but that depends on your Figma plan quota and often requires a selected layer in the file. This repo also includes:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Service logos** — PNGs copied from `../subscription-logos` into `public/images/services/`.
+2. **Optional marketing art** — place exported PNGs here and they replace placeholders automatically:
+   - `public/images/figma/hero-wallet.png` — hero illustration
+   - `public/images/figma/value-wallet.png` — “Subscriptions add up” section
+   - `public/images/figma/phone-mockup.png` — phone showcase
+
+**Download from Figma with a Personal Access Token** (no MCP):
+
+1. Figma → **Settings** → **Security** → create a **Personal access token**.
+2. Open your file, select a frame, copy the link. `node-id=95-1546` → API node id is `95:1546`.
+3. From `finilo-web`:
+
+```bash
+export FIGMA_ACCESS_TOKEN=figd_your_token_here
+# Optional: FIGMA_FILE_KEY=gk5owlgTOfjHI4oXPwrZnB
+npm run figma:assets -- 95:1546 11:182
+```
+
+PNG files are written to `public/images/figma/<node-id>.png`. Rename the ones you need to `hero-wallet.png`, `value-wallet.png`, or `phone-mockup.png`, or adjust `src/app/page.tsx`.
