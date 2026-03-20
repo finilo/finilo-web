@@ -89,7 +89,7 @@ export function LdpLanding() {
               Clearly
             </div>
             <p className="mt-4 max-w-[520px] text-[clamp(1.1rem,3.8vw,2rem)] font-normal leading-normal text-[#8e8e93]">
-              Track, manage, and stop paying for subscriptions you don't use, all in one place.
+              {`Track, manage, and stop paying for subscriptions you don't use, all in one place.`}
             </p>
             <div id="download" className="mt-6 flex w-full flex-col items-center gap-3">
               <DownloadFiniloButton onActivate={openDownload} fontFamily={sf} iconLeftSrc={L.finiloIcon} iconRightSrc={L.group7} wrapperClassName="h-[48px] w-[270px] max-w-full shrink-0 sm:h-[72.973px] sm:w-[405px]" />
@@ -128,7 +128,7 @@ export function LdpLanding() {
             <div className="flex w-full flex-col items-center gap-4 text-center">
               <h3 className="text-[42px] font-semibold leading-[1.1]">Key Features</h3>
               <p className="max-w-[718px] text-[24px] font-normal leading-normal text-[#8e8e93]">
-                Finilo helps you track all your subscriptions in one place, stay ahead of payments, and cut off anything you don't need.
+                {`Finilo helps you track all your subscriptions in one place, stay ahead of payments, and cut off anything you don't need.`}
               </p>
             </div>
             <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -185,8 +185,7 @@ export function LdpLanding() {
                 </div>
                 <div className="w-full text-left text-[clamp(0.95rem,2.2vw,2rem)] font-normal leading-normal text-[#8e8e93]">
                   <p>
-                    It's easy to forget what you signed up for. Monthly charges pile up, free trials turn into payments, and before you know it, you're
-                    spending money on services you barely use.
+                    {`It's easy to forget what you signed up for. Monthly charges pile up, free trials turn into payments, and before you know it, you're spending money on services you barely use.`}
                   </p>
                 </div>
               </div>
@@ -202,7 +201,7 @@ export function LdpLanding() {
                   <p>Everything in Check</p>
                 </div>
                 <div className="w-full text-left text-[clamp(0.95rem,2vw,1.5rem)] font-normal leading-normal text-[#8e8e93]">
-                  <p>Finilo helps you track all your subscriptions in one place, stay ahead of payments, and cut off anything you don't need.</p>
+                  <p>{`Finilo helps you track all your subscriptions in one place, stay ahead of payments, and cut off anything you don't need.`}</p>
                 </div>
               </div>
             </article>
