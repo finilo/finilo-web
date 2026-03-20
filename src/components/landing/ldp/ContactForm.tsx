@@ -80,7 +80,7 @@ export function ContactForm() {
 
       {status === "sent" ? (
         <p className="text-center text-[14px] text-[#54ffa7]" role="status">
-          Message sent! We'll get back to you soon.
+          {"Message sent! We'll get back to you soon."}
         </p>
       ) : null}
 
