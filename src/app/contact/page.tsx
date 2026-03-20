@@ -5,28 +5,27 @@ import { LdpFooter } from "@/components/landing/ldp/LdpFooter";
 import { LdpResponsiveShell } from "@/components/landing/ldp/LdpResponsiveShell";
 import { TopMenu } from "@/components/landing/ldp/TopMenu";
 import { FINILO_CONTACT_EMAIL } from "@/lib/contact";
-import { L } from "@/lib/ldpAssets";
 
 export const metadata: Metadata = {
   title: "Contact Us — Finilo",
-  description: "Get in touch with the Finilo team. Questions, feedback, or partnerships — we’d love to hear from you.",
+  description: "Get in touch with the Finilo team. Questions, feedback, or partnership ideas — we'd love to hear from you.",
 };
 
 export default function ContactPage() {
   return (
     <main
       className="relative min-h-screen w-full overflow-x-clip bg-black text-white"
-      style={{ fontFamily: "var(--font-sora)" }}
+      style={{
+        fontFamily: "var(--font-sora)",
+        backgroundImage: "url('/images/hero-grid-pattern.svg')",
+        backgroundRepeat: "repeat-x",
+        backgroundPosition: "center top",
+        backgroundSize: "1512px auto",
+      }}
     >
       <LdpResponsiveShell designMinHeight={1400} variant="compact">
         <div className="relative min-h-[1400px] overflow-x-clip">
           <TopMenu />
-
-          {/* Grid pattern */}
-          <div className="pointer-events-none absolute inset-[-0.06%_-1.26%_79.97%_-0.4%]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img alt="" className="absolute block max-w-none size-full" src={L.gridPattern} />
-          </div>
 
           {/* Page title */}
           <div className="absolute left-1/2 top-[220px] flex -translate-x-1/2 flex-col justify-center px-4 text-center text-[clamp(1.75rem,8vw,4.2rem)] leading-[1.1] text-white not-italic min-[1200px]:top-[256px] min-[1200px]:px-0 min-[1200px]:text-[67.319px] min-[1200px]:leading-[0] min-[1200px]:whitespace-nowrap">
