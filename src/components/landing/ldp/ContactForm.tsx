@@ -11,10 +11,12 @@ export function ContactForm() {
   const [errorMsg, setErrorMsg] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
-  async function handleSubmit(formData: FormData) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     setStatus("sending");
     setErrorMsg("");
 
+    const formData = new FormData(e.currentTarget);
     const result = await submitContactForm(formData);
 
     if (result.success) {
@@ -33,7 +35,7 @@ export function ContactForm() {
     <form
       ref={formRef}
       className="flex w-full max-w-[min(100%,520px)] flex-col gap-5 self-center text-left"
-      action={handleSubmit}
+      onSubmit={handleSubmit}
       style={{ fontFamily: sf }}
     >
       <div>
