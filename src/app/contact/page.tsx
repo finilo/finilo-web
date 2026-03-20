@@ -44,7 +44,7 @@ export default function ContactPage() {
 
         <ContactForm />
 
-        <LdpFooter className="flex w-full max-w-[1388px] flex-col items-center px-4 pt-12 leading-[0] sm:px-0" />
+        <LdpFooter className="mx-auto flex w-full max-w-[694px] flex-col items-center px-4 pt-12 leading-[0] sm:px-0" />
       </div>
     </main>
   );

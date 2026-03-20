@@ -1,40 +1,39 @@
 "use client";
 
 import { FINILO_CONTACT_EMAIL } from "@/lib/contact";
-import { useState, type FormEvent } from "react";
+import { submitContactForm } from "@/lib/contactAction";
+import { useState, useRef } from "react";
 
 const sf = "var(--font-sora)";
 
 export function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "opened">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  const formRef = useRef<HTMLFormElement>(null);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const name = String(data.get("name") ?? "").trim();
-    const email = String(data.get("email") ?? "").trim();
-    const message = String(data.get("message") ?? "").trim();
+  async function handleSubmit(formData: FormData) {
+    setStatus("sending");
+    setErrorMsg("");
 
-    const subject = encodeURIComponent(
-      name ? `Finilo — message from ${name}` : "Finilo — contact form",
-    );
-    const body = encodeURIComponent(
-      [name && `Name: ${name}`, email && `Email: ${email}`, "", message].filter(Boolean).join("\n"),
-    );
+    const result = await submitContactForm(formData);
 
-    window.location.href = `mailto:${FINILO_CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    setStatus("opened");
+    if (result.success) {
+      setStatus("sent");
+      formRef.current?.reset();
+    } else {
+      setErrorMsg(result.error ?? "Something went wrong");
+      setStatus("error");
+    }
   }
 
-  /* Match LDP inputs / Download CTA: 11px radius, #262626 / #545454 borders */
   const fieldClass =
     "w-full rounded-[11px] border border-[#262626] bg-[#0f0f0f] px-4 py-3 text-[16px] leading-normal text-white outline-none placeholder:text-[#6b7280] focus:border-[#545454] focus:ring-1 focus:ring-[#545454]";
 
   return (
     <form
+      ref={formRef}
       className="flex w-full max-w-[min(100%,520px)] flex-col gap-5 self-center text-left"
-      onSubmit={handleSubmit}
+      action={handleSubmit}
       style={{ fontFamily: sf }}
     >
       <div>
@@ -71,13 +70,21 @@ export function ContactForm() {
       </div>
       <button
         type="submit"
-        className="mt-2 w-full rounded-[11px] border-[0.912px] border-dashed border-[#545454] bg-[#262626] px-6 py-4 text-[18px] font-medium text-white transition-colors hover:bg-[#303030] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8e8e93] focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+        disabled={status === "sending"}
+        className="mt-2 w-full rounded-[11px] border-[0.912px] border-dashed border-[#545454] bg-[#262626] px-6 py-4 text-[18px] font-medium text-white transition-colors hover:bg-[#303030] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8e8e93] focus-visible:ring-offset-2 focus-visible:ring-offset-black disabled:opacity-50"
       >
-        Send message
+        {status === "sending" ? "Sending..." : "Send message"}
       </button>
-      {status === "opened" ? (
-        <p className="text-center text-[14px] text-[#8e8e93]" role="status">
-          If your mail app didn’t open, email us at{" "}
+
+      {status === "sent" ? (
+        <p className="text-center text-[14px] text-[#54ffa7]" role="status">
+          Message sent! We'll get back to you soon.
+        </p>
+      ) : null}
+
+      {status === "error" ? (
+        <p className="text-center text-[14px] text-[#eb4335]" role="alert">
+          {errorMsg} You can also email us at{" "}
           <a className="text-white underline" href={`mailto:${FINILO_CONTACT_EMAIL}`}>
             {FINILO_CONTACT_EMAIL}
           </a>
