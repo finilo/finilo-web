@@ -1,6 +1,7 @@
 "use server";
 
 const API_BASE = process.env.BACKEND_API_URL || "https://api.finiloapp.xyz";
+const API_KEY = process.env.BACKEND_API_KEY;
 
 export async function submitContactForm(formData: FormData) {
   const name = String(formData.get("name") ?? "").trim();
@@ -14,7 +15,10 @@ export async function submitContactForm(formData: FormData) {
   try {
     const res = await fetch(`${API_BASE}/api/contact`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        ...(API_KEY ? { "x-api-key": API_KEY } : {}),
+      },
       body: JSON.stringify({ name, email, message }),
     });
 
