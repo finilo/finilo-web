@@ -105,15 +105,20 @@ export function TopMenu() {
       {menuOpen ? (
         <div
           className="fixed inset-0 z-[40] bg-black"
-          onMouseDown={(e) => {
-            // Close only when clicking the background, not on the menu content itself.
+          onClick={(e) => {
             if (e.target === e.currentTarget) closeMenu();
           }}
         >
           {/* Grid background */}
-          <div className="-translate-x-1/2 absolute left-1/2 top-[-0.21px] h-[min(994px,100vh)] w-[min(1537px,100vw)] max-w-none">
-            <img alt="" className="absolute block max-w-none size-full object-cover object-top" src={L.gridPattern} />
-          </div>
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "url('/images/hero-grid-pattern.svg')",
+              backgroundRepeat: "repeat-x",
+              backgroundPosition: "center top",
+              backgroundSize: "1512px auto",
+            }}
+          />
 
           {/* Close (X) */}
           <button
@@ -131,7 +136,7 @@ export function TopMenu() {
 
           {/* Menu items — do not call closeMenu on these Links: closing the overlay before
               the route changes briefly reveals the home page while still on `/`. */}
-          <div className="absolute left-1/2 top-[min(282px,22vh)] flex w-[min(681px,calc(100%-32px))] -translate-x-1/2 flex-col items-center gap-6 sm:gap-[27px]">
+          <div className="absolute left-1/2 top-[min(282px,22vh)] z-10 flex w-[min(681px,calc(100%-32px))] -translate-x-1/2 flex-col items-center gap-6 sm:gap-[27px]">
             <Link
               href="/privacy"
               className="content-stretch flex items-center justify-center p-[10px] relative shrink-0"
@@ -167,7 +172,7 @@ export function TopMenu() {
           </div>
 
           {/* Footer */}
-          <div className="absolute bottom-6 left-4 right-4 flex flex-col items-center gap-10 leading-[0] sm:bottom-[55.51px] sm:gap-[94px] min-[1512px]:left-[62px] min-[1512px]:right-auto min-[1512px]:w-[1388px]">
+          <div className="pointer-events-none absolute bottom-6 left-4 right-4 flex flex-col items-center gap-10 leading-[0] sm:bottom-[55.51px] sm:gap-[94px] min-[1512px]:left-[62px] min-[1512px]:right-auto min-[1512px]:w-[1388px]">
             <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] opacity-10 place-items-start">
               <div className="relative col-1 row-1 ml-[637.73px] mt-[18.76px] h-[271.973px] w-[750.27px]">
                 <img alt="" className="absolute block max-w-none size-full" src={menuImgLogo} />
