@@ -1,7 +1,5 @@
 /** Local copies of Figma MCP exports — run `node scripts/download-ldp-assets.mjs` to refresh. */
 export const L = {
-  logo: "/images/ldp/logo.svg",
-  group22: "/images/ldp/group22.svg",
   duolingo: "/images/ldp/duolingo.png",
   iconJpeg: "/images/ldp/iconJpeg.png",
   discord: "/images/ldp/discord.png",

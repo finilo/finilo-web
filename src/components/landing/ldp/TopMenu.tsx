@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { L } from "@/lib/ldpAssets";
@@ -8,6 +9,8 @@ import { L } from "@/lib/ldpAssets";
 const sf = "var(--font-sora)";
 
 export function TopMenu() {
+  const pathname = usePathname();
+  const router = useRouter();
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -31,6 +34,10 @@ export function TopMenu() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, []);
 
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
   const toggleTheme = () => {
     const next = !document.documentElement.classList.contains("dark");
     document.documentElement.classList.toggle("dark", next);
@@ -40,16 +47,24 @@ export function TopMenu() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const goHome = () => {
+    if (pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      router.push("/");
+    }
+  };
+
   return (
     <>
       {/* Menu bar */}
-      <div className="absolute left-1/2 top-0 flex w-[1512px] -translate-x-1/2 content-stretch items-center justify-between px-16 pb-6 pt-8">
+      <div className="fixed left-1/2 top-0 z-30 flex w-full max-w-[1512px] -translate-x-1/2 content-stretch items-center justify-between px-4 pb-4 pt-5 sm:px-8 sm:pb-6 sm:pt-8 lg:px-16">
         <img alt="" className="pointer-events-none absolute inset-0 size-full max-w-none object-cover" src={L.menuBar} />
 
         <button
           type="button"
           aria-label="Finilo home"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          onClick={goHome}
           className="relative h-[33px] w-[64px] shrink-0 cursor-pointer border-0 bg-transparent p-0"
         >
           <div className="absolute inset-[0_0_5.29%_0]">
@@ -57,7 +72,7 @@ export function TopMenu() {
           </div>
         </button>
 
-        <div className="relative flex shrink-0 content-stretch items-center justify-center gap-8">
+        <div className="relative flex shrink-0 content-stretch items-center justify-center gap-4 sm:gap-8">
           <button
             type="button"
             className="relative block size-8 shrink-0 cursor-pointer"
@@ -89,15 +104,15 @@ export function TopMenu() {
 
       {menuOpen ? (
         <div
-          className="absolute inset-0 z-[40] bg-black"
+          className="fixed inset-0 z-[40] bg-black"
           onMouseDown={(e) => {
             // Close only when clicking the background, not on the menu content itself.
             if (e.target === e.currentTarget) closeMenu();
           }}
         >
           {/* Grid background */}
-          <div className="-translate-x-1/2 absolute h-[994.114px] left-[calc(50%+0.5px)] top-[-0.21px] w-[1537px]">
-            <img alt="" className="absolute block max-w-none size-full" src={L.gridPattern} />
+          <div className="-translate-x-1/2 absolute left-1/2 top-[-0.21px] h-[min(994px,100vh)] w-[min(1537px,100vw)] max-w-none">
+            <img alt="" className="absolute block max-w-none size-full object-cover object-top" src={L.gridPattern} />
           </div>
 
           {/* Close (X) */}
@@ -105,7 +120,7 @@ export function TopMenu() {
             type="button"
             aria-label="Close menu"
             onClick={closeMenu}
-            className="absolute block cursor-pointer left-[1305px] size-[92px] top-[104px]"
+            className="absolute right-4 top-4 z-10 block size-14 cursor-pointer sm:right-8 sm:top-8 sm:size-[72px] min-[1512px]:left-[1305px] min-[1512px]:right-auto min-[1512px]:top-[104px] min-[1512px]:size-[92px]"
           >
             <div className="absolute inset-[20.83%]">
               <div className="absolute inset-[-2.8%]">
@@ -114,15 +129,15 @@ export function TopMenu() {
             </div>
           </button>
 
-          {/* Menu items */}
-          <div className="absolute flex flex-col gap-[27px] items-center left-[415px] top-[282px] w-[681px]">
+          {/* Menu items — do not call closeMenu on these Links: closing the overlay before
+              the route changes briefly reveals the home page while still on `/`. */}
+          <div className="absolute left-1/2 top-[min(282px,22vh)] flex w-[min(681px,calc(100%-32px))] -translate-x-1/2 flex-col items-center gap-6 sm:gap-[27px]">
             <Link
               href="/privacy"
-              onClick={closeMenu}
               className="content-stretch flex items-center justify-center p-[10px] relative shrink-0"
             >
               <div
-                className="flex flex-col justify-center leading-[0] not-italic relative shrink-0 text-[67.319px] text-white text-center whitespace-nowrap"
+                className="relative flex shrink-0 flex-col justify-center text-center text-[clamp(2rem,10vw,4.2rem)] leading-[1.1] text-white not-italic min-[1512px]:text-[67.319px] min-[1512px]:leading-[0]"
                 style={{ fontFamily: sf, fontWeight: 400 }}
               >
                 <p className="leading-[1.1]">Privacy Policy</p>
@@ -131,20 +146,28 @@ export function TopMenu() {
 
             <Link
               href="/agreement"
-              onClick={closeMenu}
-              className="content-stretch flex items-center justify-center p-[10px] relative shrink-0 w-full"
+              className="relative flex w-full shrink-0 items-center justify-center p-[10px]"
             >
               <div
-                className="flex flex-col justify-center leading-[0] not-italic relative shrink-0 text-[67.319px] text-white text-center whitespace-nowrap"
+                className="relative flex shrink-0 flex-col justify-center text-center text-[clamp(2rem,10vw,4.2rem)] leading-[1.1] text-white not-italic min-[1512px]:text-[67.319px] min-[1512px]:leading-[0]"
                 style={{ fontFamily: sf, fontWeight: 400 }}
               >
                 <p className="leading-[1.1]">Terms &amp; Condition</p>
               </div>
             </Link>
+
+            <Link href="/contact" className="relative flex shrink-0 items-center justify-center p-[10px]">
+              <div
+                className="relative flex shrink-0 flex-col justify-center text-center text-[clamp(2rem,10vw,4.2rem)] leading-[1.1] text-white not-italic min-[1512px]:text-[67.319px] min-[1512px]:leading-[0]"
+                style={{ fontFamily: sf, fontWeight: 400 }}
+              >
+                <p className="leading-[1.1]">Contact Us</p>
+              </div>
+            </Link>
           </div>
 
           {/* Footer */}
-          <div className="absolute bottom-[55.51px] flex flex-col gap-[94px] items-center left-[62px] w-[1388px] leading-[0]">
+          <div className="absolute bottom-6 left-4 right-4 flex flex-col items-center gap-10 leading-[0] sm:bottom-[55.51px] sm:gap-[94px] min-[1512px]:left-[62px] min-[1512px]:right-auto min-[1512px]:w-[1388px]">
             <div className="relative inline-grid grid-cols-[max-content] grid-rows-[max-content] opacity-10 place-items-start">
               <div className="relative col-1 row-1 ml-[637.73px] mt-[18.76px] h-[271.973px] w-[750.27px]">
                 <img alt="" className="absolute block max-w-none size-full" src={menuImgLogo} />
@@ -156,7 +179,7 @@ export function TopMenu() {
               </div>
             </div>
             <div className="relative flex flex-col justify-center min-w-full not-italic shrink-0 text-[#8e8e93] text-center w-[min-content] text-[14px] font-semibold leading-[1.4]">
-              <p className="leading-[1.4]">© Copyright 2025. All Rights Reserved</p>
+              <p className="leading-[1.4]">© Copyright {new Date().getFullYear()}. All Rights Reserved</p>
             </div>
           </div>
         </div>

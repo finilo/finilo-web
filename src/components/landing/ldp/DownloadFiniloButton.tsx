@@ -19,7 +19,7 @@ export function DownloadFiniloButton({
 }: DownloadFiniloButtonProps) {
   return (
     <div
-      className={`${wrapperClassName} cursor-pointer outline-none focus:outline-none focus-visible:outline-none`}
+      className={`${wrapperClassName} relative flex cursor-pointer items-center justify-center gap-[10px] overflow-hidden rounded-[8px] border-[0.7px] border-dashed border-[#545454] bg-[#262626] px-[6px] outline-none focus:outline-none focus-visible:outline-none sm:gap-[14.595px] sm:rounded-[11px] sm:border-[0.912px] sm:px-[10px] min-[405px]:px-[8px] sm:min-[405px]:px-[14px]`}
       role="button"
       tabIndex={0}
       onClick={onActivate}
@@ -32,21 +32,21 @@ export function DownloadFiniloButton({
       }}
       aria-label="Download Finilo"
     >
-      <div className="absolute inset-0 rounded-[11px] border-[0.912px] border-dashed border-[#545454] bg-[#262626]" />
-      <div className="absolute left-[calc(50%-0.91px)] top-[calc(50%+0.91px)] flex -translate-x-1/2 -translate-y-1/2 content-stretch items-center gap-[14.595px]">
-        <div className="relative size-[31.014px] shrink-0">
-          <img
-            alt=""
-            className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
-            src={iconLeftSrc}
-          />
-        </div>
-        <p className="relative shrink-0 whitespace-nowrap text-[25.54px] leading-normal text-white not-italic" style={{ fontFamily, fontWeight: 400 }}>
-          Download Finilo
-        </p>
-        <div className="relative h-[27.365px] w-[58.378px] shrink-0">
-          <img alt="" className="pointer-events-none absolute block size-full max-w-none" src={iconRightSrc} />
-        </div>
+      <div className="relative size-[22px] shrink-0 sm:size-[31.014px]">
+        <img
+          alt=""
+          className="pointer-events-none absolute inset-0 size-full max-w-none object-cover"
+          src={iconLeftSrc}
+        />
+      </div>
+      <p
+        className="relative shrink-0 whitespace-nowrap text-[16px] leading-normal text-white not-italic sm:text-[25.54px]"
+        style={{ fontFamily, fontWeight: 400 }}
+      >
+        Download Finilo
+      </p>
+      <div className="relative h-[20px] w-[42px] shrink-0 sm:h-[27.365px] sm:w-[58.378px]">
+        <img alt="" className="pointer-events-none absolute block size-full max-w-none" src={iconRightSrc} />
       </div>
     </div>
   );

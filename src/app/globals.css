@@ -46,3 +46,54 @@ body {
   color: var(--foreground);
   font-family: var(--font-sora), system-ui, sans-serif;
 }
+
+/* -------------------------------------------------------------------------- */
+/* Finilo LDP: fixed 1512px Figma canvas scales to fit narrow viewports        */
+/* -------------------------------------------------------------------------- */
+
+.ldp-page {
+  width: 100%;
+  max-width: 1512px;
+  margin-left: auto;
+  margin-right: auto;
+  container-type: inline-size;
+  container-name: ldp;
+  overflow: hidden;
+  background: #000000;
+  /* Outer height is set by LdpResponsiveShell from scaled content */
+}
+
+.ldp-inner {
+  position: relative;
+  width: 1512px;
+  min-height: 4947px;
+  transform-origin: top left;
+  transform: scale(calc(100cqw / 1512px));
+}
+
+.ldp-inner--legal {
+  min-height: 2946px;
+}
+
+/* Shorter static pages (e.g. contact) — height comes from content + designMinHeight */
+.ldp-inner--compact {
+  min-height: 0;
+}
+
+/* Full-bleed social strip at wide viewports (media query avoids container CQ rounding bugs) */
+.ldp-social-strip {
+  pointer-events: none;
+  position: absolute;
+  top: 831px;
+  height: 386px;
+  overflow: hidden;
+  left: 0;
+  width: 100%;
+}
+
+@media (min-width: 1512px) {
+  .ldp-social-strip {
+    left: calc(50% - 50vw);
+    width: 100vw;
+  }
+}

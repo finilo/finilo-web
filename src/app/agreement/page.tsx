@@ -1,28 +1,9 @@
 /* eslint-disable @next/next/no-img-element -- pixel-perfect Figma layout uses precise <img> dimensions */
 
-import { L } from "@/lib/ldpAssets";
+import { LdpFooter } from "@/components/landing/ldp/LdpFooter";
+import { LdpResponsiveShell } from "@/components/landing/ldp/LdpResponsiveShell";
 import { TopMenu } from "@/components/landing/ldp/TopMenu";
-
-function Footer({ className }: { className?: string }) {
-  return (
-    <div className={className || "relative flex w-[1388px] flex-col items-center gap-[94px] leading-[0]"} style={{ fontFamily: "var(--font-sora)" }}>
-      <div className="relative inline-grid shrink-0 grid-cols-[max-content] grid-rows-[max-content] place-items-start opacity-10">
-        <div className="relative col-1 row-1 ml-[637.73px] mt-[18.76px] h-[271.973px] w-[750.27px]">
-          <img alt="" className="absolute block max-w-none size-full" src={L.logo} />
-        </div>
-        <div className="relative col-1 row-1 ml-0 mt-0 h-[309.486px] w-[600.216px]">
-          <div className="absolute inset-[0_0_5.29%_0]">
-            <img alt="" className="absolute block max-w-none size-full" src={L.group22} />
-          </div>
-        </div>
-      </div>
-
-      <div className="relative flex w-full min-w-full flex-col justify-center text-center text-[14px] font-semibold leading-[1.4] text-[#8e8e93] not-italic">
-        <p>© Copyright 2025. All Rights Reserved</p>
-      </div>
-    </div>
-  );
-}
+import { L } from "@/lib/ldpAssets";
 
 function LegalBlock() {
   return (
@@ -58,32 +39,37 @@ function LegalBlock() {
 
 export default function AgreementPage() {
   return (
-    <main className="relative min-h-screen w-full bg-black text-white overflow-hidden" style={{ fontFamily: "var(--font-sora)" }}>
-      <div className="relative mx-auto min-h-[2946px] w-[1512px] overflow-hidden">
-        <TopMenu />
+    <main
+      className="relative min-h-screen w-full overflow-x-clip bg-black text-white"
+      style={{ fontFamily: "var(--font-sora)" }}
+    >
+      <LdpResponsiveShell designMinHeight={2946} variant="legal">
+        <div className="relative min-h-[2946px] overflow-x-clip">
+          <TopMenu />
 
-        {/* Grid pattern */}
-        <div className="absolute inset-[-0.06%_-1.26%_79.97%_-0.4%] pointer-events-none">
-          <img alt="" className="absolute block max-w-none size-full" src={L.gridPattern} />
+          {/* Grid pattern */}
+          <div className="absolute inset-[-0.06%_-1.26%_79.97%_-0.4%] pointer-events-none">
+            <img alt="" className="absolute block max-w-none size-full" src={L.gridPattern} />
+          </div>
+
+          {/* Main legal text */}
+          <div className="absolute left-4 right-4 top-[380px] flex flex-col content-stretch items-start gap-[23px] text-[24px] leading-[1.1] text-white not-italic min-[1200px]:left-[184px] min-[1200px]:right-auto min-[1200px]:top-[423px] min-[1200px]:w-[1144px]">
+            <LegalBlock />
+            <LegalBlock />
+            <LegalBlock />
+            <LegalBlock />
+            <LegalBlock />
+            <LegalBlock />
+          </div>
+
+          <LdpFooter className="absolute bottom-10 left-4 right-4 flex flex-col content-stretch items-center gap-10 leading-[0] min-[1200px]:bottom-[60.26px] min-[1200px]:left-[62px] min-[1200px]:right-auto min-[1200px]:w-[1388px] min-[1200px]:gap-[94px]" />
+
+          {/* Page title */}
+          <div className="absolute left-1/2 top-[220px] flex -translate-x-1/2 flex-col justify-center px-4 text-center text-[clamp(1.5rem,7vw,4.2rem)] leading-[1.1] text-white not-italic min-[1200px]:top-[256px] min-[1200px]:px-0 min-[1200px]:text-[67.319px] min-[1200px]:leading-[0] min-[1200px]:whitespace-nowrap">
+            <p className="leading-[1.1]">{`Terms & Condition`}</p>
+          </div>
         </div>
-
-        {/* Main legal text */}
-        <div className="absolute content-stretch flex flex-col gap-[23px] items-start leading-[0] left-[184px] not-italic text-[0px] text-[24px] text-white top-[423px] w-[1144px]">
-          <LegalBlock />
-          <LegalBlock />
-          <LegalBlock />
-          <LegalBlock />
-          <LegalBlock />
-          <LegalBlock />
-        </div>
-
-        <Footer className="absolute bottom-[60.26px] content-stretch flex flex-col gap-[94px] items-center leading-[0] left-[62px] w-[1388px]" />
-
-        {/* Page title */}
-        <div className="-translate-x-1/2 -translate-y-1/2 absolute flex flex-col justify-center leading-[0] left-[789.5px] not-italic text-[67.319px] text-center text-white top-[256px] whitespace-nowrap">
-          <p className="leading-[1.1]">{`Terms & Condition`}</p>
-        </div>
-      </div>
+      </LdpResponsiveShell>
     </main>
   );
 }

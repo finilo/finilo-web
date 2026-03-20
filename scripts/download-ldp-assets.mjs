@@ -10,8 +10,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.join(__dirname, "..", "public", "images", "ldp");
 
 const assets = {
-  logo: "https://www.figma.com/api/mcp/asset/a0e47b3c-6b27-495e-928f-871c04feefcc",
-  group22: "https://www.figma.com/api/mcp/asset/ed5e0ef4-999d-43e7-a2b3-cbc42e878429",
   duolingo: "https://www.figma.com/api/mcp/asset/8e905979-3444-4cd2-9229-f451f94b7a80",
   iconJpeg: "https://www.figma.com/api/mcp/asset/6e6d25c0-b8ce-47fc-9141-9be6351169d9",
   discord: "https://www.figma.com/api/mcp/asset/c5ebfdfc-6e8c-4119-bf1a-e6bf9a7c175b",
