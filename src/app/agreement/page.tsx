@@ -246,9 +246,9 @@ export default function AgreementPage() {
               <p>
                 <a
                   className="text-white underline decoration-[#545454] underline-offset-4 hover:decoration-white"
-                  href="mailto:support@finilo.io"
+                  href="mailto:support@finiloapp.xyz"
                 >
-                  support@finilo.io
+                  support@finiloapp.xyz
                 </a>
               </p>
             </div>
@@ -286,9 +286,9 @@ export default function AgreementPage() {
                 these Terms by contacting us at{" "}
                 <a
                   className="text-white underline decoration-[#545454] underline-offset-4 hover:decoration-white"
-                  href="mailto:support@finilo.io"
+                  href="mailto:support@finiloapp.xyz"
                 >
-                  support@finilo.io
+                  support@finiloapp.xyz
                 </a>
                 .
               </li>

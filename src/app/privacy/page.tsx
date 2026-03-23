@@ -199,9 +199,9 @@ export default function PrivacyPolicyPage() {
               Requests:{" "}
               <a
                 className="text-white underline decoration-[#545454] underline-offset-4 hover:decoration-white"
-                href="mailto:support@finilo.io"
+                href="mailto:support@finiloapp.xyz"
               >
-                support@finilo.io
+                support@finiloapp.xyz
               </a>
             </p>
           </section>
@@ -278,9 +278,9 @@ export default function PrivacyPolicyPage() {
               <p>
                 <a
                   className="text-white underline decoration-[#545454] underline-offset-4 hover:decoration-white"
-                  href="mailto:support@finilo.io"
+                  href="mailto:support@finiloapp.xyz"
                 >
-                  support@finilo.io
+                  support@finiloapp.xyz
                 </a>
               </p>
             </div>
