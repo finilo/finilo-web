@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   title: "Finilo — See every subscription clearly",
   description:
     "Track, manage, and visualize all your subscriptions in one place. Never miss a renewal.",
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export const viewport: Viewport = {
