@@ -1,6 +1,7 @@
 "use client";
 /* eslint-disable @next/next/no-img-element -- Figma-exported layout uses precise <img> dimensions */
 
+import { FINILO_APP_STORE_URL, isFiniloAndroidClient } from "@/components/landing/AppStoreDownloadLink";
 import { L } from "@/lib/ldpAssets";
 import { DownloadFiniloButton } from "./DownloadFiniloButton";
 import { LdpFooter } from "./LdpFooter";
@@ -9,23 +10,9 @@ import { TopMenu } from "./TopMenu";
 const sf = "var(--font-sora)";
 
 export function LdpLanding() {
-  const getDownloadUrl = () => {
-    const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
-    const nav = navigator as unknown as { ontouchend?: unknown };
-    const isIOS =
-      /iPad|iPhone|iPod/.test(ua) ||
-      (ua.includes("Macintosh") && "ontouchend" in nav);
-
-    // TODO: Replace with the exact store links you want these buttons to use.
-    const iosUrl =
-      "https://apps.apple.com/us/app/subpilot-by-finelo/id6751181747";
-    const androidUrl =
-      "https://play.google.com/store/apps/details?id=io.zimran.subpilot&hl=en_US";
-    return isIOS ? iosUrl : androidUrl;
-  };
-
   const openDownload = () => {
-    window.open(getDownloadUrl(), "_blank", "noopener,noreferrer");
+    if (isFiniloAndroidClient()) return;
+    window.open(FINILO_APP_STORE_URL, "_blank", "noopener,noreferrer");
   };
 
   const features = [

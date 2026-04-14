@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { AppStoreDownloadLink } from "./AppStoreDownloadLink";
 import { FiniloWordmark, WalletIllustration } from "./FiniloLogo";
 import { ThemeToggle } from "./ThemeToggle";
 
@@ -67,12 +68,9 @@ export function LandingPage({
             <FiniloWordmark />
           </a>
           <div className="flex items-center gap-3">
-            <a
-              href="#download"
-              className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-white dark:bg-accent dark:text-[#0a0a0f] sm:inline-flex"
-            >
+            <AppStoreDownloadLink className="hidden rounded-full bg-primary px-4 py-2 text-sm font-medium text-white no-underline dark:bg-accent dark:text-[#0a0a0f] sm:inline-flex">
               Download
-            </a>
+            </AppStoreDownloadLink>
             <ThemeToggle />
           </div>
         </div>
@@ -91,20 +89,18 @@ export function LandingPage({
                 of renewals, price changes, or services you no longer use.
               </p>
               <div id="download" className="mt-10 flex flex-wrap gap-4">
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-border bg-surface px-6 py-3.5 text-sm font-semibold shadow-sm transition hover:bg-surface-elevated"
-                >
+                <AppStoreDownloadLink className="inline-flex items-center gap-2 rounded-2xl border border-border bg-surface px-6 py-3.5 text-sm font-semibold no-underline shadow-sm transition hover:bg-surface-elevated">
                   <AppleStoreIcon />
                   Download on the App Store
-                </a>
-                <a
-                  href="#"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-border bg-surface px-6 py-3.5 text-sm font-semibold shadow-sm transition hover:bg-surface-elevated"
+                </AppStoreDownloadLink>
+                <span
+                  className="inline-flex cursor-not-allowed items-center gap-2 rounded-2xl border border-border bg-surface px-6 py-3.5 text-sm font-semibold text-muted opacity-70"
+                  aria-disabled="true"
+                  title="Android app coming soon"
                 >
                   <PlayStoreIcon />
                   Get it on Google Play
-                </a>
+                </span>
               </div>
             </div>
             <div className="flex justify-center lg:justify-end">
@@ -269,12 +265,9 @@ export function LandingPage({
               Download the app and start organizing your subscriptions today.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <a
-                href="#download"
-                className="inline-flex rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-white dark:bg-accent dark:text-[#0a0a0f]"
-              >
+              <AppStoreDownloadLink className="inline-flex rounded-full bg-primary px-8 py-3.5 text-sm font-semibold text-white no-underline dark:bg-accent dark:text-[#0a0a0f]">
                 Download Now
-              </a>
+              </AppStoreDownloadLink>
             </div>
           </div>
         </section>
